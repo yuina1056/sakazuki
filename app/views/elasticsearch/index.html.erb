@@ -1,0 +1,36 @@
+<h1>Elasticsearch#index</h1>
+
+<%= form_with({ scope: :elasticsearch,
+                url: elasticsearch_path,
+                method: :get,
+                local: true,
+                class: "form-inline my-1" }) do |f| %>
+  <%= f.label "search", class: "sr-only" %>
+  <%= f.text_field(:word,
+                    { placeholder: "Search",
+                      value: params.dig(:elasticsearch, :word),
+                      class: "form-control mr-sm-2" }) %>
+  <%= f.submit("Elastic Search", { class: "btn btn-secondary" }) %>
+<% end %>
+
+<% @sakes.each do |sake| %>
+  <div class="row">
+    <%= sake.aroma_impression %>
+    <%= sake.awa %>
+    <%= sake.color %>
+    <%= sake.genryomai %>
+    <%= sake.kakemai %>
+    <%= sake.kobo %>
+    <%= sake.kura %>
+    <%= sake.name %>
+    <%= sake.nigori %>
+    <%= sake.note %>
+    <%= sake.roka %>
+    <%= sake.season %>
+    <%= sake.shibori %>
+    <%= sake.taste_impression %>
+    <%= sake.todofuken %>
+  </div>
+<% end %>
+
+<%= paginate(@sakes) %>
