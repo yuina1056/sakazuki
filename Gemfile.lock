@@ -116,6 +116,7 @@ GEM
       rest-client
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
+    connection_pool (2.2.3)
     crass (1.0.6)
     debug_inspector (1.0.0)
     devise (4.7.3)
@@ -288,6 +289,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.2.5)
     regexp_parser (2.0.3)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -335,6 +337,10 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (2.3.1)
+    sidekiq (6.1.3)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     smart_properties (1.15.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
@@ -422,6 +428,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   seed_dump
   selenium-webdriver
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

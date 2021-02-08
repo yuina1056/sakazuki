@@ -57,6 +57,7 @@ gem "bootstrap-icons-helper"
 gem "bonsai-elasticsearch-rails"
 gem "elasticsearch-model"
 gem "elasticsearch-rails"
+gem "sidekiq"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger

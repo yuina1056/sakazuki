@@ -16,7 +16,7 @@ services:
     ports:
       - "5432:5432"
     hostname: db
-  web:
+  web: &app-base
     image: sakazuki
     volumes:
       - .:/sakazuki:cached
@@ -29,6 +29,7 @@ services:
       POSTGRES_HOSTNAME: db
       ELASTICSEARCH_HOST: elasticsearch-custom
       ELASTICSEARCH_PORT: 9200
+      REDIS_URL: redis://redis:6379
     build:
       context: .
       dockerfile: ./docker/web/Dockerfile
@@ -69,6 +70,10 @@ services:
       - 6379:6379
     volumes:
       - redis_strage:/data
-  # sidekiq:
-  #   build: .
-  #   command: bundle exec sidekiq
+  sidekiq:
+    <<: *app-base
+    command: bash -c "bundle exec sidekiq --verbose"
+    ports: []
+    depends_on:
+      - redis
+      - web
