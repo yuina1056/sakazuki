@@ -1,4 +1,4 @@
-<h1>Elasticsearch#index</h1>
+<h2><%= link_to(t("views.elasticsearch.title"),elasticsearch_path) %></h2>
 
 <%= form_with({ scope: :elasticsearch,
                 url: elasticsearch_path,
@@ -14,31 +14,57 @@
 <% end %>
 
 <% @sakes.each do |sake| %>
+  <h4 class="row">
+    <div class="col-12">
+      <%= link_to("#{sake.name} #{sake.todofuken} #{sake.kura}",sake_path(sake.id)) %>
+    </div>
+  </h4>
   <div class="row">
-    <%= sake.name %>
-    <%= sake.kura %>
-    <%= sake.bindume_date %>
-    <%= sake.brew_year %>
-    <%= sake.todofuken %>
-    <%= sake.aroma_impression %>
-    <%= sake.color %>
-    <%= sake.taste_impression %>
-    <%= sake.nigori %>
-    <%= sake.awa %>
-    <%= sake.tokutei_meisho %>
-    <%= sake.genryomai %>
-    <%= sake.kakemai %>
-    <%= sake.kobo %>
-    <%= sake.season %>
-    <%= sake.warimizu %>
-    <%= sake.moto %>
-    <%= sake.roka %>
-    <%= sake.shibori %>
-    <%= sake.note %>
-    <%= sake.bottle_level %>
-    <%= sake.hiire %>
-    <%= sake.created_at %>
-    <%= sake.updated_at %>
+    <div class="col-12">
+      <%= Sake.human_attribute_name(:tokutei_meisho) %>:<%= sake.tokutei_meisho %>
+      <%= sake.bottle_level %>
+      <%= sake.season %>
+      <% if sake.bindume_date.present? %>
+        <%= Sake.human_attribute_name(:bindume_date) %>:
+        <%= sake.bindume_date.in_time_zone.strftime("%Y/%m/%d") %>
+      <% end %>
+      <% if sake.brew_year.present? %>
+        <%= Sake.human_attribute_name(:brew_year) %>:
+        <%= sake.brew_year.in_time_zone.strftime("%Y") %>
+      <% end %>
+      <%= sake.nigori %>
+      <%= sake.awa %>
+      <% if sake.genryomai.present? %>
+        <%= Sake.human_attribute_name(:genryomai) %>:
+        <%= sake.genryomai %>
+      <% end %>
+      <% if sake.kakemai.present? %>
+        <%= Sake.human_attribute_name(:kakemai) %>:
+        <%= sake.kakemai %>
+      <% end %>
+      <%= sake.kobo %>
+      <%= sake.warimizu %>
+      <%= sake.moto %>
+      <%= sake.roka %>
+      <%= sake.shibori %>
+      <%= sake.hiire %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <%= sake.color %>
+      <%= sake.aroma_impression %>
+      <%= sake.taste_impression %>
+      <%= sake.note %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p class="text-secondary">
+        created: <%= sake.created_at.in_time_zone.strftime("%Y/%m/%d %H:%M:%S") %>
+        updated: <%= sake.updated_at.in_time_zone.strftime("%Y/%m/%d %H:%M:%S") %>
+      </p>
+    </div>
   </div>
 <% end %>
 
