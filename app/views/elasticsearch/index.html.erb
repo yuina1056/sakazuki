@@ -7,29 +7,38 @@
                 class: "form-inline my-1" }) do |f| %>
   <%= f.label "search", class: "sr-only" %>
   <%= f.text_field(:word,
-                    { placeholder: "Search",
-                      value: params.dig(:elasticsearch, :word),
-                      class: "form-control mr-sm-2" }) %>
+                   { placeholder: "Search",
+                     value: params.dig(:elasticsearch, :word),
+                     class: "form-control mr-sm-2" }) %>
   <%= f.submit("Elastic Search", { class: "btn btn-secondary" }) %>
 <% end %>
 
 <% @sakes.each do |sake| %>
   <div class="row">
+    <%= sake.name %>
+    <%= sake.kura %>
+    <%= sake.bindume_date %>
+    <%= sake.brew_year %>
+    <%= sake.todofuken %>
     <%= sake.aroma_impression %>
-    <%= sake.awa %>
     <%= sake.color %>
+    <%= sake.taste_impression %>
+    <%= sake.nigori %>
+    <%= sake.awa %>
+    <%= sake.tokutei_meisho %>
     <%= sake.genryomai %>
     <%= sake.kakemai %>
     <%= sake.kobo %>
-    <%= sake.kura %>
-    <%= sake.name %>
-    <%= sake.nigori %>
-    <%= sake.note %>
-    <%= sake.roka %>
     <%= sake.season %>
+    <%= sake.warimizu %>
+    <%= sake.moto %>
+    <%= sake.roka %>
     <%= sake.shibori %>
-    <%= sake.taste_impression %>
-    <%= sake.todofuken %>
+    <%= sake.note %>
+    <%= sake.bottle_level %>
+    <%= sake.hiire %>
+    <%= sake.created_at %>
+    <%= sake.updated_at %>
   </div>
 <% end %>
 
