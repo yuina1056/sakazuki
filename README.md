@@ -14,6 +14,9 @@
 - Yarn🐈 >= 1.22.4
 - Node.js >= 12.20.1
 - PostgreSQL >= 12.0
+- ElasticSearch >= 7.10.2
+  - Japanese (kuromoji) Analysis Plugin
+  - ICU Analysis Plugin
 
 ## How to use
 
@@ -33,7 +36,7 @@ POSTGRES_PASSWORD=your_postgresql_password
   - `bundle exec rails db:seed`
 - サーバの起動
   - `bundle exec rails server`
-- [http://localhost:3000/]へアクセスする
+- [http://localhost:3000/] へアクセスする
 - 最初の管理者ユーザの設定（オプション）
   - Sakazukiへのログインに使われる
 
@@ -54,7 +57,7 @@ User.create!(
 - localユーザの設定
   - まだ
 - 送信メールの確認
-  - [http://localhost:3000/letter_opener]にアクセス
+  - <http://localhost:3000/letter_opener>にアクセス
 
 ## How to deploy to heroku
 
@@ -104,7 +107,7 @@ $ docker-compose build
 ...
 ```
 
-- PostgreSQLコンテナの初期設定
+- PostgreSQLコンテナ、ElasticSearchコンテナの初期設定
 
 ```console
 $ docker-compose run --rm web bundle exec rails db:create
@@ -112,6 +115,10 @@ $ docker-compose run --rm web bundle exec rails db:create
 $ docker-compose run --rm web bundle exec rails db:migrate
 ...
 $ docker-compose run --rm web bundle exec rails db:seed
+...
+$ docker-compose run --rm es elasticsearch-plugin install analysis-icu
+...
+$ docker-compose run --rm es elasticsearch-plugin install analysis-kuromoji
 ...
 ```
 
@@ -123,6 +130,14 @@ $ docker-compose up
 ```
 
 - Gem/Node Packageの更新があった場合は、`docker-compose build`でイメージを更新する
+
+- PostgreSQLのDBとElasticSearchの同期が取れていない場合は、下記のコマンドで強制的に同期する
+
+```console
+$ docker-compose run --rm web bundle exec rake environment \
+  elasticsearch:import:model CLASS='Sake' FORCE=y
+...
+```
 
 ## How to Contribute
 
