@@ -49,6 +49,11 @@ class SakesController < ApplicationController
     @sake.kura = add_todofuken(@sake.kura, @sake.todofuken)
   end
 
+  def edit_with_openbottle
+    @sake.bottle_level = :opened
+    edit
+  end
+
   # POST /sakes
   # POST /sakes.json
   def create

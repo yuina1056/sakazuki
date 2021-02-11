@@ -7,8 +7,8 @@ for (const tr of trs) {
   const id = tr.dataset.sakeId
   if (id != null) {
     const newLocation = '/sakes/' + id
-    tr.onclick = () => {
-      window.location.assign(newLocation)
-    }
+    // tr.onclick = () => {
+    //   window.location.assign(newLocation)
+    // }
   }
 }

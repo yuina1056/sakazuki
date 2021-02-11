@@ -1,5 +1,9 @@
 <h2><%= t(".title") %></h2>
 
+<%= link_to("Test Link !!",
+           sake_path(@sakes.find(101), params: { sake: {bottle_level: "empty"}}),
+           method: :patch) %>
+
 <%= render "sake-buttons" %>
 
 <div class="row my-1">
@@ -61,7 +65,11 @@
           <div class="row m-0 mt-2">
             <div calss="col p-0">
               <%= sake.bottle_level_i18n %>
-              <% if sake.bottle_level == "opened" %>
+              <% if sake.bottle_level == "sealed" %>
+                <%= link_to(html_escape(t(".open")) + bootstrap_icon("droplet-half", { width: "1em", height: "1em" }),
+                            edit_sake_path(sake),
+                            { class: "badge badge-primary" }) %>
+              <% elsif sake.bottle_level == "opened" %>
                 <%= link_to(html_escape(t(".empty")) + bootstrap_icon("droplet", { width: "1em", height: "1em" }),
                             sake_path(sake, params: { sake: { bottle_level: "empty" }}),
                             { method: :patch,
@@ -90,6 +98,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%# raise %>
 
 <%= paginate(@sakes) %>
 
